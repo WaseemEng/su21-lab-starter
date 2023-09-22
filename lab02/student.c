@@ -18,9 +18,9 @@ void printStudent(struct Student student) {
 int main() {
      struct Student s1;
     strcpy(s1.name, "Waseem_Abbas");
-    s1.ID = 5;   // Note: I corrected "s1->id" to "s1.ID"
+    s1.ID = 5;  
     s1.age = 23;
-    printStudent(s1); // Note: I corrected "student" to "s1"
+    printStudent(s1); 
     return 0;
 }
 
