@@ -78,7 +78,14 @@ main:
 f:
     # YOUR CODE GOES HERE!
 
-    jr ra               # Always remember to jr ra after your function!
+    # we multiplied the argument value by 4
+    slli a0, a0, 2
+    # add the  array address
+    add  a0, a0, a1
+    # here we load array value at three places 3*4=12 B
+    lw   a0, 12(a0)
+
+    jr ra        
 
 print_int:
     mv a1, a0
@@ -97,3 +104,4 @@ print_newline:
     li a0, 11
     ecall
     jr    ra
+
