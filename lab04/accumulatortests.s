@@ -17,16 +17,22 @@ TestFailed: .asciiz "Test Failed!"
 main:
     la a0 inputarray
     
+    
+      # acuumulatorthree already working
+       jal accumulatorthree
+       li t0 28
+       beq a0 t0 Pass
+    
     #corrections for acuumulatorone
-    li s0 -1
-    addi sp sp -4 #prolougue
-    sw s0 0(sp)
-    jal accumulatorone #jump and link to function
-     lw t1 0(sp)
-     addi sp sp 4   #epilogue
-     li t0 28
-     bne s0 t1 Fail 
-     beq a0 t0 Pass
+   # li s0 -1
+   # addi sp sp -4 #prolougue
+   # sw s0 0(sp)
+   # jal accumulatorone #jump and link to function
+    # lw t1 0(sp)
+    # addi sp sp 4   #epilogue
+   #  li t0 28
+   #  bne s0 t1 Fail 
+    # beq a0 t0 Pass
     
     # corrections for acuumulatortwo 
     # li t0 50
