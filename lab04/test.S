@@ -39,6 +39,7 @@ factorial:
     addi a2, a2, -1   # a2 - 1
     jal factorial     # Recursive call
 
+
     # Restore saved registers from the stack
     lw ra, 0(sp)      
     lw a3, 4(sp)      
@@ -58,7 +59,7 @@ label1:
 
 # Define the data section
 .data    
-num: .word 3      # Initialize num with the value 3
+num: .word 4      # Initialize num with the value 3
 result: .word 0   # Initialize result with 0
 
 # Define the write_tohost function
