@@ -1,0 +1,95 @@
+
+test.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+80000000 <main>:
+80000000:	00001597          	auipc	a1,0x1
+80000004:	00058593          	mv	a1,a1
+80000008:	0005a583          	lw	a1,0(a1) # 80001000 <number>
+8000000c:	030000ef          	jal	8000003c <fact_with_rec>
+80000010:	00001697          	auipc	a3,0x1
+80000014:	ff468693          	add	a3,a3,-12 # 80001004 <result>
+80000018:	0006a383          	lw	t2,0(a3)
+8000001c:	00050393          	mv	t2,a0
+80000020:	0076a023          	sw	t2,0(a3)
+80000024:	0540006f          	j	80000078 <write_tohost>
+80000028:	00038593          	mv	a1,t2
+8000002c:	00100513          	li	a0,1
+80000030:	00000073          	ecall
+80000034:	00a00513          	li	a0,10
+80000038:	00000073          	ecall
+
+8000003c <fact_with_rec>:
+8000003c:	ff810113          	add	sp,sp,-8
+80000040:	00b12023          	sw	a1,0(sp)
+80000044:	00112223          	sw	ra,4(sp)
+80000048:	00100513          	li	a0,1
+8000004c:	00100293          	li	t0,1
+80000050:	02558063          	beq	a1,t0,80000070 <done>
+80000054:	fff58593          	add	a1,a1,-1
+80000058:	fe5ff0ef          	jal	8000003c <fact_with_rec>
+8000005c:	00412083          	lw	ra,4(sp)
+80000060:	00012303          	lw	t1,0(sp)
+80000064:	02650533          	mul	a0,a0,t1
+80000068:	00810113          	add	sp,sp,8
+8000006c:	00008067          	ret
+
+80000070 <done>:
+80000070:	00100613          	li	a2,1
+80000074:	00008067          	ret
+
+80000078 <write_tohost>:
+80000078:	00100093          	li	ra,1
+8000007c:	00002f17          	auipc	t5,0x2
+80000080:	f81f2223          	sw	ra,-124(t5) # 80002000 <tohost>
+80000084:	ff5ff06f          	j	80000078 <write_tohost>
+
+Disassembly of section .data:
+
+80001000 <number>:
+80001000:	0004                	.insn	2, 0x0004
+	...
+
+80001004 <result>:
+	...
+
+Disassembly of section .tohost:
+
+80002000 <tohost>:
+	...
+
+80002010 <fromhost>:
+	...
+
+Disassembly of section .riscv.attributes:
+
+00000000 <.riscv.attributes>:
+   0:	4b41                	.insn	2, 0x4b41
+   2:	0000                	.insn	2, 0x
+   4:	7200                	.insn	2, 0x7200
+   6:	7369                	.insn	2, 0x7369
+   8:	01007663          	bgeu	zero,a6,14 <main-0x7fffffec>
+   c:	0041                	.insn	2, 0x0041
+   e:	0000                	.insn	2, 0x
+  10:	7205                	.insn	2, 0x7205
+  12:	3376                	.insn	2, 0x3376
+  14:	6932                	.insn	2, 0x6932
+  16:	7032                	.insn	2, 0x7032
+  18:	5f31                	.insn	2, 0x5f31
+  1a:	326d                	.insn	2, 0x326d
+  1c:	3070                	.insn	2, 0x3070
+  1e:	615f 7032 5f31      	.insn	6, 0x5f317032615f
+  24:	3266                	.insn	2, 0x3266
+  26:	3270                	.insn	2, 0x3270
+  28:	645f 7032 5f32      	.insn	6, 0x5f327032645f
+  2e:	697a                	.insn	2, 0x697a
+  30:	32727363          	bgeu	tp,t2,356 <main-0x7ffffcaa>
+  34:	3070                	.insn	2, 0x3070
+  36:	7a5f 6669 6e65      	.insn	6, 0x6e6566697a5f
+  3c:	32696563          	bltu	s2,t1,366 <main-0x7ffffc9a>
+  40:	3070                	.insn	2, 0x3070
+  42:	7a5f 6d6d 6c75      	.insn	6, 0x6c756d6d7a5f
+  48:	7031                	.insn	2, 0x7031
+  4a:	0030                	.insn	2, 0x0030
